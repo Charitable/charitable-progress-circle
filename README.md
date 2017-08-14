@@ -9,7 +9,11 @@ Just install it!
 If you would like to display a progress circle for a particular campaign somewhere else, use the following code:
 
 ```
-charitable_template_campaign_percentage_raised( 123 );
+// First get the campaign.
+$campaign = charitable_get_campaign( 123 );
+
+// Then display the progress circle.
+charitable_template_campaign_percentage_raised( $campaign );
 ```
 
 Replace `123` with the ID of your campaign.
