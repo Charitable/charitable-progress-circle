@@ -55,7 +55,7 @@ function charitable_template_campaign_percentage_raised( $campaign ) {
 }
 </style>
 <div class="campaign-raised campaign-summary-item">
-    <div class="charitable-percent-raised-chart" data-percent="<?php echo esc_attr( $campaign->get_percent_donated_raw() ) ?>" data-scale-color="false"><span><?php echo $campaign->get_percent_donated_raw() ?></span>%</div>
+    <div class="charitable-percent-raised-chart" data-percent="<?php echo esc_attr( number_format( $campaign->get_percent_donated_raw(), 2 ) ) ?>" data-scale-color="false"><span><?php echo $campaign->get_percent_donated_raw() ?></span>%</div>
     <div class="charitable-amount-raised"><?php echo $campaign->get_donation_summary() ?></div>
 </div>
 <?php
