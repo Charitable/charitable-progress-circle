@@ -17,9 +17,6 @@ if ( ! function_exists( 'charitable_template_campaign_percentage_raised' ) ) {
 			return false;
 		}
 
-		$percent   = $campaign->get_percent_donated_raw();
-		$formatted = number_format( $percent, 2, charitable_get_currency_helper()->get_decimal_separator(), '' );
-
 		wp_enqueue_script( 'jquery-easypiechart', plugin_dir_url( __FILE__ ) . 'jquery.easypiechart.min.js', array( 'jquery' ), '2.1.7', false );
 		wp_add_inline_script( 'jquery-easypiechart', '(function($){$(".charitable-percent-raised-chart").easyPieChart({ size: 190 })})(jQuery)' );
 		?>
@@ -63,7 +60,7 @@ if ( ! function_exists( 'charitable_template_campaign_percentage_raised' ) ) {
 }
 </style>
 <div class="campaign-raised campaign-summary-item">
-	<div class="charitable-percent-raised-chart" data-percent="<?php echo esc_attr( $percent ); ?>" data-scale-color="false"><span><?php echo $formatted; ?></span>%</div>
+	<div class="charitable-percent-raised-chart" data-percent="<?php echo esc_attr( $campaign->get_percent_donated_raw() ); ?>" data-scale-color="false"><span><?php echo $campaign->get_percent_donated(); ?></span></div>
 	<div class="charitable-amount-raised"><?php echo $campaign->get_donation_summary(); ?></div>
 </div>
 		<?php
