@@ -3,7 +3,7 @@
  * Plugin Name: Charitable - Progress Circle
  * Plugin URI:  https://github.com/Charitable/charitable-progress-circle
  * Description: Add a progress circle to the campaign page for campaigns with a goal. This will replace the usual campaign summary block with a customized "card" style block for the campaign.
- * Version:     0.2
+ * Version:     0.3
  * Author:      WP Charitable
  * Author URI:  https://www.wpcharitable.com/
  */
@@ -20,13 +20,12 @@ if ( ! function_exists( 'charitable_template_campaign_percentage_raised' ) ) {
 		$percent   = $campaign->get_percent_donated_raw();
 		$formatted = number_format( $percent, 2, charitable_get_currency_helper()->get_decimal_separator(), '' );
 
-		wp_enqueue_script( 'jquery-easypiechart', plugin_dir_url( __FILE__ ) . 'jquery.easypiechart.min.js', array( 'jquery-core' ), '2.1.7', false );
+		wp_enqueue_script( 'jquery-easypiechart', plugin_dir_url( __FILE__ ) . 'jquery.easypiechart.min.js', array( 'jquery' ), '2.1.7', false );
 		wp_add_inline_script( 'jquery-easypiechart', '(function($){$(".charitable-percent-raised-chart").easyPieChart({ size: 190 })})(jQuery)' );
 		?>
 <style>
 .campaign-summary {
-	box-sizing: content-box;
-	float: left;
+	box-sizing: border-box;
 	min-width: 190px;
 	margin-right: 1em;
 	width: 100%;
@@ -34,10 +33,11 @@ if ( ! function_exists( 'charitable_template_campaign_percentage_raised' ) ) {
 .campaign-raised.campaign-summary-item {
 	position: relative;
 	width: 100%;
+	text-align: center;
 }
 .charitable-percent-raised-chart {
 	position: relative;
-	float: left;
+	display: inline-block;
 	width: 190px;
 	height: 190px;
 	line-height: 190px;
@@ -51,15 +51,15 @@ if ( ! function_exists( 'charitable_template_campaign_percentage_raised' ) ) {
 	left: 0;
 }
 .campaign-raised .charitable-amount-raised {
-	position: absolute;
-	left: 210px; /* 190 + 20 */
-	top: 50%;
-	transform: translateY(-50%);
+	display: inline-block;
+	margin-left: 20px;
+	text-align: left;
 }
 .campaign-donors.campaign-summary-item,
 .campaign-time-left.campaign-summary-item {
 	border: none;
 	font-size: 0.9em;
+	text-align: center;
 }
 </style>
 <div class="campaign-raised campaign-summary-item">
